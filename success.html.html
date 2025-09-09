@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification Pending</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f2027;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .container {
+      background: #2c5364;
+      padding: 30px;
+      border-radius: 12px;
+      width: 350px;
+    }
+    #timer {
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Please wait 30 minutes while we verify your account</h2>
+    <div id="timer">30:00</div>
+  </div>
+
+  <script>
+    // Prevent going back to verify.html
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
+
+    // Countdown timer
+    let timeLeft = 30 * 60; // 30 minutes in seconds
+    const timerElement = document.getElementById('timer');
+
+    const countdown = setInterval(() => {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      timerElement.textContent = `${minutes}:${seconds}`;
+
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        timerElement.textContent = "Verification complete!";
+      }
+      timeLeft--;
+    }, 1000);
+  </script>
+</body>
+</html>
+

